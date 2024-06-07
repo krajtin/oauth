@@ -21,7 +21,7 @@ const cookieParser = require('cookie-parser');
 //  https://platzi.com/blog/usando-socketio-en-aplicaciones-de-nextjs/
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 9090;
 console.log('RUNNING FROM= ', process.env.NODE_ENV)
 // Verificación de si corre en producción o en desarrollo
 const dev = process.env.NODE_ENV !== 'production'
