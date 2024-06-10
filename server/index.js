@@ -96,29 +96,16 @@ nextApp
 			res.send(data)
 		});
 		app.post('/relay', (req, res) => {
+			res.send("RELAY")
+			
+		});
+		app.post('/reply', (req, res) => {
 			const { SAMLResponse } = req.body;
 			const parseStringUTF8 = atob(SAMLResponse);
 			const parserXML = new xml2js.Parser();
 			parserXML.parseString(parseStringUTF8, (err, result) => {
 				res.send(JSON.stringify(result))
 			});
-			
-		});
-		app.post('/reply', (req, res) => {
-			const data = {
-				type: "POST",
-				query: JSON.stringify(req.query),
-				cookies: JSON.stringify(req.cookies),
-				headers: JSON.stringify(req.headers),
-				body: JSON.stringify(req.body),
-				params: JSON.stringify(req.params),
-				url: JSON.stringify(req.url),
-				originalUrl: JSON.stringify(req.originalUrl),
-				baseUrl: JSON.stringify(req.baseUrl),
-				path: JSON.stringify(req.path),
-				hostName: JSON.stringify(req.hostname),
-			}
-			res.send(data)
 		});
 		app.get('/reply', (req, res) => {
 			const data = {
