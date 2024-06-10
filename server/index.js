@@ -45,6 +45,134 @@ nextApp
 		app.use(cors());
 		//app.use(allowCrossDomain);
 		app.use(cookieParser());
+		app.get('/sign', (req, res) => {
+			const data = {
+				type: "GET",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
+		app.post('/sign', (req, res) => {
+			const data = {
+				type: "POST",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
+		app.get('/relay', (req, res) => {
+			const data = {
+				type: "GET",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
+		app.post('/relay', (req, res) => {
+			const data = {
+				type: "POST",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
+		app.post('/reply', (req, res) => {
+			const data = {
+				type: "POST",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
+		app.get('/reply', (req, res) => {
+			const data = {
+				type: "POST",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
+		app.get('/logout', (req, res) => {
+			const data = {
+				type: "GET",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
+		app.post('/logout', (req, res) => {
+			const data = {
+				type: "POST",
+				query: JSON.stringify(req.query),
+				cookies: JSON.stringify(req.cookies),
+				headers: JSON.stringify(req.headers),
+				body: JSON.stringify(req.body),
+				params: JSON.stringify(req.params),
+				url: JSON.stringify(req.url),
+				originalUrl: JSON.stringify(req.originalUrl),
+				baseUrl: JSON.stringify(req.baseUrl),
+				path: JSON.stringify(req.path),
+				hostName: JSON.stringify(req.hostname),
+			}
+			res.send(data)	
+		});
 		/*app.use(passport.initialize());
 		
 		//app.use(cors());
