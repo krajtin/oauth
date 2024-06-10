@@ -2,6 +2,7 @@
 
 // Cargamos la base de datos y acceso a ficheros
 require('dotenv').config({ path: 'variables.env' });
+const xml2js = require('xml2js');
 const passport = require("passport");
 const configurePassportGoogle = require("./configurePassportGoogle")
 
@@ -60,7 +61,7 @@ nextApp
 				path: JSON.stringify(req.path),
 				hostName: JSON.stringify(req.hostname),
 			}
-			res.send(data)	
+			res.send(data)
 		});
 		app.post('/sign', (req, res) => {
 			const data = {
@@ -76,7 +77,7 @@ nextApp
 				path: JSON.stringify(req.path),
 				hostName: JSON.stringify(req.hostname),
 			}
-			res.send(data)	
+			res.send(data)
 		});
 		app.get('/relay', (req, res) => {
 			const data = {
@@ -92,11 +93,16 @@ nextApp
 				path: JSON.stringify(req.path),
 				hostName: JSON.stringify(req.hostname),
 			}
-			res.send(data)	
+			res.send(data)
 		});
 		app.post('/relay', (req, res) => {
+			const { SAMLResponse } = req.body;
+			const parseStringUTF8 = atob(SAMLResponse);
+			const parserXML = new xml2js.Parser();
+			parserXML.parseString(parseStringUTF8, (err, result) => {
+				res.send(JSON.stringify(result))
+			});
 			
-			res.send(JSON.stringify(req))	
 		});
 		app.post('/reply', (req, res) => {
 			const data = {
@@ -112,7 +118,7 @@ nextApp
 				path: JSON.stringify(req.path),
 				hostName: JSON.stringify(req.hostname),
 			}
-			res.send(data)	
+			res.send(data)
 		});
 		app.get('/reply', (req, res) => {
 			const data = {
@@ -128,7 +134,7 @@ nextApp
 				path: JSON.stringify(req.path),
 				hostName: JSON.stringify(req.hostname),
 			}
-			res.send(data)	
+			res.send(data)
 		});
 		app.get('/logout', (req, res) => {
 			const data = {
@@ -144,7 +150,7 @@ nextApp
 				path: JSON.stringify(req.path),
 				hostName: JSON.stringify(req.hostname),
 			}
-			res.send(data)	
+			res.send(data)
 		});
 		app.post('/logout', (req, res) => {
 			const data = {
@@ -160,7 +166,7 @@ nextApp
 				path: JSON.stringify(req.path),
 				hostName: JSON.stringify(req.hostname),
 			}
-			res.send(data)	
+			res.send(data)
 		});
 		/*app.use(passport.initialize());
 		
@@ -179,9 +185,9 @@ nextApp
 			*/
 
 		// Verbos
-		app.get("/", (req ,res) => {
-            res.send("INDEX");
-        })
+		app.get("/", (req, res) => {
+			res.send("INDEX");
+		})
 		app.get('*', (req, res) => {
 			return handle(req, res);
 		});
