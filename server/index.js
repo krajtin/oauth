@@ -3,6 +3,8 @@
 // Cargamos la base de datos y acceso a ficheros
 require('dotenv').config({ path: 'variables.env' });
 const xml2js = require('xml2js');
+var saml2 = require('saml2-js');
+const fs = require("fs");
 const passport = require("passport");
 const configurePassportGoogle = require("./configurePassportGoogle")
 
@@ -37,6 +39,26 @@ var allowCrossDomain = function (req, res, next) {
 	res.header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authrorization, X-Requested-With',);
 	next();
 }
+
+// Configuración de Azure AD
+const azureAdConfig = {
+	entity_id: "https://testazure.optisigns.net",
+	private_key: fs.readFileSync("testazure.pem").toString(),
+	certificate: fs.readFileSync("testazure.cer").toString(),
+	assert_endpoint: "https://oauth2-f2qg.onrender.com/reply",
+};
+
+// Crear un objeto SAML2
+const sp = new saml2.ServiceProvider(azureAdConfig);
+// Create identity provider
+var idp_options = {
+	sso_login_url: "https://login.microsoftonline.com/98f4b976-ba31-4d3e-ad9c-332eb5a36ca8/saml2",
+	sso_logout_url: "https://oauth2-f2qg.onrender.com/logout",
+	certificates: [fs.readFileSync("testazure.cer").toString()]
+};
+var idp = new saml2.IdentityProvider(idp_options);
+
+
 
 nextApp
 	.prepare()
@@ -97,7 +119,7 @@ nextApp
 		});
 		app.post('/relay', (req, res) => {
 			res.send("RELAY")
-			
+
 		});
 		app.post('/reply', (req, res) => {
 			const { SAMLResponse } = req.body;
@@ -154,6 +176,20 @@ nextApp
 				hostName: JSON.stringify(req.hostname),
 			}
 			res.send(data)
+		});
+		// Ruta de autenticación
+		app.get("/metadata.xml", function (req, res) {
+			res.type('application/xml');
+			res.send(sp.create_metadata());
+		});
+
+		// Starting point for login
+		app.get("/login", function (req, res) {
+			sp.create_login_request_url(idp, {}, function (err, login_url, request_id) {
+				if (err != null)
+					return res.send(500);
+				res.redirect(login_url);
+			});
 		});
 		/*app.use(passport.initialize());
 		
