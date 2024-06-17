@@ -61,10 +61,10 @@ var idp = new saml2.IdentityProvider(idp_options);
 
 // Configuración de Azure AD
 const azureAdConfig = {
-	entity_id: "https://takumiers.com",
+	entity_id: "https://clientes.workerix.com",
 	private_key: fs.readFileSync("testazure.pem").toString(),
 	certificate: fs.readFileSync("testazure.cer").toString(),
-	assert_endpoint: "https://oauth2-f2qg.onrender.com/reply",
+	assert_endpoint: "https://clientes.workerix.com/api/auth/azure/reply",
 };
 
 // Crear un objeto SAML2
