@@ -41,8 +41,27 @@ var allowCrossDomain = function (req, res, next) {
 }
 
 // Configuración de Azure AD
-const azureAdConfig = {
+/*const azureAdConfig = {
 	entity_id: "https://testazure.optisigns.net",
+	private_key: fs.readFileSync("testazure.pem").toString(),
+	certificate: fs.readFileSync("testazure.cer").toString(),
+	assert_endpoint: "https://oauth2-f2qg.onrender.com/reply",
+};
+
+// Crear un objeto SAML2
+const sp = new saml2.ServiceProvider(azureAdConfig);
+// Create identity provider
+var idp_options = {
+	sso_login_url: "https://login.microsoftonline.com/98f4b976-ba31-4d3e-ad9c-332eb5a36ca8/saml2",
+	sso_logout_url: "https://oauth2-f2qg.onrender.com/logout",
+	certificates: [fs.readFileSync("testazure.cer").toString()]
+};
+var idp = new saml2.IdentityProvider(idp_options);
+*/
+
+// Configuración de Azure AD
+const azureAdConfig = {
+	entity_id: "https://takumiers.com",
 	private_key: fs.readFileSync("testazure.pem").toString(),
 	certificate: fs.readFileSync("testazure.cer").toString(),
 	assert_endpoint: "https://oauth2-f2qg.onrender.com/reply",
