@@ -60,7 +60,7 @@ var idp = new saml2.IdentityProvider(idp_options);
 */
 
 // Configuración de Azure AD
-const azureAdConfig = {
+/*const azureAdConfig = {
 	entity_id: "https://clientes.workerix.com",
 	private_key: fs.readFileSync("testazure.pem").toString(),
 	certificate: fs.readFileSync("testazure.cer").toString(),
@@ -72,6 +72,22 @@ const sp = new saml2.ServiceProvider(azureAdConfig);
 // Create identity provider
 var idp_options = {
 	sso_login_url: "https://login.microsoftonline.com/98f4b976-ba31-4d3e-ad9c-332eb5a36ca8/saml2",
+	sso_logout_url: "https://oauth2-f2qg.onrender.com/logout",
+	certificates: [fs.readFileSync("testazure.cer").toString()]
+};
+*/
+const azureAdConfig = {
+	entity_id: "https://clientes.workerix.com",
+	private_key: fs.readFileSync("testazure.pem").toString(),
+	certificate: fs.readFileSync("testazure.cer").toString(),
+	assert_endpoint: "https://clientes.workerix.com/api/auth/azure/reply",
+};
+
+// Crear un objeto SAML2
+const sp = new saml2.ServiceProvider(azureAdConfig);
+// Create identity provider
+var idp_options = {
+	sso_login_url: "https://login.microsoftonline.com/6482b5be-18f5-444e-b4fa-99e3db8fa3b2/saml2",
 	sso_logout_url: "https://oauth2-f2qg.onrender.com/logout",
 	certificates: [fs.readFileSync("testazure.cer").toString()]
 };
